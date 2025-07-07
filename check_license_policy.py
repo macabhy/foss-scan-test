@@ -9,7 +9,7 @@ forbidden_licenses = {
 }
 
 # Load scan result
-with open("reports/axios-scan.json", "r", encoding="utf-8") as f:
+with open("axios-scan.json", "r", encoding="utf-8") as f:
     data = json.load(f)
 
 found = set()
