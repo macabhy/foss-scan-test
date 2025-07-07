@@ -30,7 +30,14 @@ jobs:
       - name: Run license policy check
         run: |
           python3 check_license_policy.py
-            - name: Capture license summary output
+      - name: Capture license summary output
+        id: license_check
+        run: |
+          summary=$(python3 check_license_policy.py)
+          echo "summary<<EOF" >> $GITHUB_OUTPUT
+          echo "$summary" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
         id: license_check
         run: |
           python3 check_license_policy.py
