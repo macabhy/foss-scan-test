@@ -25,6 +25,10 @@ jobs:
         run: |
           cd scancode-toolkit
           scancode -clpeui --processes 1 --json-pp ../axios-scan.json ../src/axios
+      - name: Run license policy check
+        run: |
+          python3 check_license_policy.py
+    
 
       - name: Upload Scan Report
         uses: actions/upload-artifact@v4
