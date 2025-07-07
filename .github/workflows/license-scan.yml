@@ -34,7 +34,8 @@ jobs:
         id: license_check
         shell: bash
         run: |
-          summary=$(python3 check_license_policy.py)
+          summary="$(python3 check_license_policy.py)"
           echo "summary<<EOF" >> $GITHUB_OUTPUT
           echo "$summary" >> $GITHUB_OUTPUT
-          echo "EOF" >> $G
+          echo "EOF" >> $GITHUB_OUTPUT
+
