@@ -1,10 +1,13 @@
 name: FOSS License Scan
 
+permissions:
+  pull-requests: write
+  contents: read
+
 on:
   pull_request:
-    paths:
-      - 'src/**'
-      - 'check_license_policy.py'
+    branches: [ main ]  # <-- This part is ESSENTIAL
+
 
 jobs:
   license-scan:
