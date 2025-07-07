@@ -37,16 +37,4 @@ jobs:
           summary=$(python3 check_license_policy.py)
           echo "summary<<EOF" >> $GITHUB_OUTPUT
           echo "$summary" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
-      - name: Comment on PR with license summary
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.payload.pull_request.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `📄 **License Scan Summary**\n${{ steps.license_check.outputs.summary }}`
-            })
+          echo "EOF" >> $G
