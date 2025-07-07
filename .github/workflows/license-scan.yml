@@ -1,0 +1,33 @@
+name: FOSS License Scan
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  scancode:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3 python3-pip
+          git clone https://github.com/nexB/scancode-toolkit.git
+          cd scancode-toolkit
+          pip install -e .
+
+      - name: Run ScanCode
+        run: |
+          cd scancode-toolkit
+          scancode -clpeui --processes 1 --json-pp ../axios-scan.json ../src/axios
+
+      - name: Upload Scan Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: license-scan-report
+          path: axios-scan.json
