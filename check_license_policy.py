@@ -22,7 +22,14 @@ for file in data.get("files", []):
             found.add(key)
 
 if found:
-    print("❌ Forbidden licenses found:", ", ".join(found))
+    print("::set-output name=summary::❌ Forbidden licenses found: " + ", ".join(found))
     sys.exit(1)
 
-print("✅ No forbidden licenses found.")
+# Collect all unique licenses for reporting
+all_licenses = set()
+for file in data.get("files", []):
+    for license in file.get("licenses", []):
+        all_licenses.add(license.get("key", ""))
+
+print("::set-output name=summary::✅ No forbidden licenses found.\n🏷️ Detected licenses: " + ", ".join(sorted(all_licenses)))
+
